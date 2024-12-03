@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,6 +19,7 @@ private string $name;
 
 #[ORM\Column(length: 255)]
 private string $style;
+#[ApiFilter(SearchFilter::class, properties: ['style' => 'partial'])]
 
 #[ORM\OneToMany(mappedBy: "artist", targetEntity: Album::class)]
 private $albums;

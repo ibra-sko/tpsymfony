@@ -16,3 +16,15 @@ api_platform:
             rfc_7807_compliant_errors: true
     keep_legacy_inflector: false
     use_symfony_listeners: true
+
+resource:
+    App\Entity\Artist:
+        collectionOperations:
+            get:
+            post:
+        itemOperations:
+            get:
+            put:
+            delete:
+                route_name: artist_albums
+

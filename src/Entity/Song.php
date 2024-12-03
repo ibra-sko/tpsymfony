@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,6 +18,8 @@ class Song {
 
     #[ORM\Column(type: "integer")]
     private int $length;
+
+    #[ApiFilter(RangeFilter::class, properties: ['length'])]
 
     #[ORM\ManyToOne(targetEntity: Album::class, inversedBy: "songs")]
     private ?Album $album;
