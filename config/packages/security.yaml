@@ -1,3 +1,4 @@
+# config/packages/security.yaml
 security:
     enable_authenticator_manager: true
     providers:
@@ -9,12 +10,17 @@ security:
         main:
             lazy: true
             provider: in_memory
-            form_login:
-                check_path: login
-                login_path: login
+            json_login:
+                check_path: /login
+                username_path: email
+                password_path: password
             logout:
-                path: logout
+                path: /logout
                 target: /
+            jwt:
+                pattern: ^/api
+                stateless: true
+                jwt: ~
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
